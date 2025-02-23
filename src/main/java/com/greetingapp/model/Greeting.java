@@ -1,5 +1,8 @@
 package com.greetingapp.model;
 
+import jakarta.persistence.*;
+
+@Entity
 public class Greeting {
     /*private String message;
 
@@ -16,6 +19,8 @@ public class Greeting {
     }*/
 
     private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String message;
 
     public Greeting(){
