@@ -5,6 +5,8 @@ import com.greetingapp.model.Greeting;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api")
 public class GreetingController {
@@ -70,5 +72,11 @@ public class GreetingController {
     public Greeting findGreetingById(@PathVariable Long id) {
         return greetingService.getGreetingById(id)
                 .orElseThrow(() -> new RuntimeException("Greeting not found with ID: " + id));
+    }
+
+    //UC-06 Ability for the Greeting App to List all the Greeting Messages in the Repository
+    @GetMapping("/allgreetings")
+    public List<Greeting> getAllGreetings() {
+        return greetingService.getAllGreetings();
     }
 }

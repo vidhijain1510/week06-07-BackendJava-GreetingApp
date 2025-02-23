@@ -5,6 +5,7 @@ import com.greetingapp.repository.GreetingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -39,5 +40,32 @@ public class GreetingService {
     // New method to find a greeting by ID
     public Optional<Greeting> getGreetingById(Long id) {
         return greetingRepository.findById(id);
+    }
+
+    //UC-06
+    public Greeting saveGreeting(String firstName, String lastName) {
+        String message;
+
+        if (firstName != null && !firstName.isEmpty() && lastName != null && !lastName.isEmpty()) {
+            message = "Hello, " + firstName.trim() + " " + lastName.trim() + "!";
+        } else if (firstName != null && !firstName.isEmpty()) {
+            message = "Hello, " + firstName.trim() + "!";
+        } else if (lastName != null && !lastName.isEmpty()) {
+            message = "Hello, " + lastName.trim() + "!";
+        } else {
+            message = "Hello World!";
+        }
+
+        message = message.replaceAll("\\s+", " ").trim(); // Remove extra spaces or newlines
+
+        Greeting greeting = new Greeting(message);
+        return greetingRepository.save(greeting);
+    }
+
+
+
+    //UC-06 Ability for the Greeti App to List all the Greeting Messages in the Repository
+    public List<Greeting> getAllGreetings() {
+        return greetingRepository.findAll();
     }
 }
