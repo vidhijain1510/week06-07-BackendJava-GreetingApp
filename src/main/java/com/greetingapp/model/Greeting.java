@@ -41,7 +41,7 @@ public class Greeting {
     public String getMessage(){
         return message;
     }
-    public void setMessage(){
+    public void setMessage(String newMessage){
         this.message = message;
     }
 }
