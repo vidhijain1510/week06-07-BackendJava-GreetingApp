@@ -83,4 +83,12 @@ public class GreetingService {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Greeting not found with id: " + id);
         }
     }
+    //UC-08 Ability for the Greeting  App to delete a Greeting Messages in thE Repository
+    public void deleteGreeting(Long id) {
+        if (greetingRepository.existsById(id)) {
+            greetingRepository.deleteById(id);
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Greeting not found with id: " + id);
+        }
+    }
 }

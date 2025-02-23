@@ -2,6 +2,7 @@ package com.greetingapp.controller;
 
 import com.greetingapp.service.GreetingService;
 import com.greetingapp.model.Greeting;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -80,11 +81,20 @@ public class GreetingController {
         return greetingService.getAllGreetings();
     }
 
-    //UC-07Ability for the Greeting App to Edit a Greeting Messages in thE Repository
+    //UC-07 Ability for the Greeting App to Edit a Greeting Messages in thE Repository
     @PutMapping("/updategreeting/{id}")
     public Greeting updateGreeting(
             @PathVariable Long id,
             @RequestParam String message) {
         return greetingService.updateGreeting(id, message);
+    }
+
+    //UC-08 Add Delete Endpoint in GreetingController.java
+    /*Uses @DeleteMapping to handle HTTP DELETE requests.
+Returns a success message when deletion is complete.*/
+    @DeleteMapping("/deletegreeting/{id}")
+    public ResponseEntity<String> deleteGreeting(@PathVariable Long id) {
+        greetingService.deleteGreeting(id);
+        return ResponseEntity.ok("Greeting with ID " + id + " deleted successfully.");
     }
 }
